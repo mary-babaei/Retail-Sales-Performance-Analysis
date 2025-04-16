@@ -17,10 +17,11 @@ class SalesPredictionModel:
         self.df['Day'] = self.df['OrderDate'].dt.day
 
         # تبدیل Product به ستون‌های عددی (one-hot encoding)
-        self.df = pd.get_dummies(self.df, columns=['Products'])
-
+        if 'Products' in self.df.columns:
+            self.df = pd.get_dummies(self.df, columns=['Products'])
         # تعریف ورودی‌ها و خروجی مدل
-        X = self.df.drop(columns=['OrderID', 'CustomersID', 'OrderDate', 'Sales'])
+        X = self.df[['Price', 'Quantity', 'Year', 'Month', 'Day'] +
+                    [col for col in self.df.columns if col.startswith('Products_')]]
         y = self.df['Sales']
 
         print("🚨 داده‌های ورودی X:")
