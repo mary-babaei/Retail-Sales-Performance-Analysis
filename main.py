@@ -1,5 +1,7 @@
 from charts import *
 from Statistic import *
+from model import *
+from Analysis import *
 
 
 if __name__ == '__main__':
@@ -36,3 +38,19 @@ if __name__ == '__main__':
     stats.plot_histogram('Price')
     stats.plot_histogram('Quantity')
     stats.plot_heatmap()
+
+    # پیش بینی و مدلسازی
+    print("🌟 شروع مدلسازی...")
+    model_instance = SalesPredictionModel(df)  # ← ساختن شیء از کلاس با دیتافریم
+    X_train, X_test, y_train, y_test = model_instance.preprocess_data()
+    model = model_instance.train_and_evaluate()
+    predictions = model.predict(X_test)
+    print("🔍 مدل ما این مقدار فروش‌ها رو پیش‌بینی کرده:")
+    print(predictions[:10])  # ۱۰ پیش‌بینی اول
+    print("🎯 مقادیر واقعی:")
+    print(y_test[:10])  # ۱۰ مقدار واقعی
+
+
+
+
+    print("🌟 پایان برنامه.")
