@@ -1,5 +1,5 @@
 import pandas as pd
-from generat_data import GenerateData  # دقت کن که اسم کلاس اصلاح شده
+from generat_data import GenerateData  
 
 class AnalysisSalesPerformance:
     def __init__(self, df):
